@@ -10,11 +10,11 @@ defmodule CardTest do
 
   test "check card count in deck", state do
     deck = state[:deck]
-    assert length(deck.affinity_cat_cards) == 60
-    assert length(deck.affinity_sock_cards) == 60
-    assert length(deck.topical_cards) == 30
-    assert length(deck.bias_red_cards) == 30
-    assert length(deck.bias_blue_cards) == 30
+    assert MapSet.size(deck.affinity_cat_cards) == 60
+    assert MapSet.size(deck.affinity_sock_cards) == 60
+    assert MapSet.size(deck.topical_cards) == 30
+    assert MapSet.size(deck.bias_red_cards) == 30
+    assert MapSet.size(deck.bias_blue_cards) == 30
   end
 
   test "draw card", state do

@@ -15,4 +15,7 @@ defmodule GameTest do
 
   test "copying of card from one player to another" do
   end
+
+  test "last 10 messages are preserved" do
+  end
 end
