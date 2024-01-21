@@ -60,13 +60,13 @@ defmodule Viralspiral.State.GameTest do
     assert length(Map.keys(game.players)) == 4
 
     player_extra = Player.new() |> Player.set_name("extra")
+
     game = game |> Game.add_player(player_extra)
 
-    assert length(Map.keys(game.players)) == 4
-
-    player_extra = Player.new() |> Player.set_name("extra")
-    game = game |> Game.add_player(player_extra)
-    assert length(Map.keys(game.players)) == 4
+    case game do
+      %Game{} = game -> assert length(Map.keys(game.players)) == 4
+      :noop -> {}
+    end
   end
 
   test "get player by name" do
@@ -74,14 +74,22 @@ defmodule Viralspiral.State.GameTest do
     player_adhiraj = Player.new() |> Player.set_name("adhiraj")
     game = game |> Game.add_player(player_adhiraj)
 
-    player = Game.get_player_by_name(game, "adhiraj")
-    IO.inspect(player)
+    # player = Game.get_player_by_name(game, "adhiraj")
+    # IO.inspect(player)
     player = Game.get_player_by_name(game, "denny")
+    assert player == nil
   end
 
   test "prevent new player from joining with the same name as an already joined player" do
-  end
+    game = Game.new(4)
+    player_adhiraj = Player.new() |> Player.set_name("adhiraj")
+    player_adhiraj_two = Player.new() |> Player.set_name("adhiraj")
 
-  test "update affinity" do
+    game = game |> Game.add_player(player_adhiraj)
+    player = Game.get_player_by_name(game, "adhiraj")
+    assert player != nil
+
+    result = Game.add_player(game, player_adhiraj_two)
+    assert result == :noop
   end
 end

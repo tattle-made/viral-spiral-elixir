@@ -28,9 +28,15 @@ defmodule Viralspiral.State.Game do
   end
 
   def add_player(%Game{} = game, %Player{} = player) do
-    case length(Map.keys(game.players)) < game.player_count do
-      true -> %{game | players: Map.put(game.players, player.name, player)}
-      false -> game
+    case get_player_by_name(game, player.name) do
+      nil ->
+        case length(Map.keys(game.players)) < game.player_count do
+          true -> %{game | players: Map.put(game.players, player.name, player)}
+          false -> :noop
+        end
+
+      _ ->
+        :noop
     end
   end
 
@@ -44,7 +50,7 @@ defmodule Viralspiral.State.Game do
   def get_player_by_name(%Game{} = game, name) do
     case game.players[name] do
       %Player{} -> game.players[name]
-      _ -> IO.puts("user not found")
+      _ -> nil
     end
   end
 end

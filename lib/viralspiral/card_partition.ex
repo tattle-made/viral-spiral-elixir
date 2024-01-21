@@ -23,9 +23,9 @@ defmodule Viralspiral.CardPartition do
     bias_cards =
       Enum.filter(deck, fn card -> Map.has_key?(card, :bias_against) end) |> MapSet.new()
 
-    bias_yellow_cards =
-      Enum.filter(bias_cards, fn card -> Map.get(card, :bias_against) == "yellow" end)
-      |> MapSet.new()
+    # bias_yellow_cards =
+    #   Enum.filter(bias_cards, fn card -> Map.get(card, :bias_against) == "yellow" end)
+    #   |> MapSet.new()
 
     bias_red_cards =
       Enum.filter(bias_cards, fn card -> Map.get(card, :bias_against) == "red" end)

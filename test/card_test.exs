@@ -1,6 +1,6 @@
 defmodule CardTest do
   use ExUnit.Case
-  alias Viralspiral.CardPartition, as: CardPartition
+  # alias Viralspiral.CardPartition, as: CardPartition
 
   setup_all do
     default_deck = Viralspiral.CardData.new()
@@ -17,14 +17,15 @@ defmodule CardTest do
     assert MapSet.size(deck.bias_blue_cards) == 30
   end
 
-  test "draw card", state do
-    deck = state[:deck]
-    affinity_cat_cards = deck.affinity_cat_cards
+  test "draw card" do
+    # deck = state[:deck]
+    # affinity_cat_cards = deck.affinity_cat_cards
 
     # IO.puts(MapSet.size(affinity_cat_cards))
-    Enum.map(affinity_cat_cards, fn card ->
-      IO.inspect(card)
-    end)
+    # Enum.map(affinity_cat_cards, fn card ->
+    #   nil
+    #   # IO.inspect(card)
+    # end)
 
     # draw a random cat affinity card with tgb less then 2
     # card = CardPartition.draw(affinity_cat_cards, :affinity, :cat)
