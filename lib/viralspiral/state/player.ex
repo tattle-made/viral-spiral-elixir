@@ -6,6 +6,7 @@ defmodule Viralspiral.State.Player do
   alias Viralspiral.State.ActiveCard
 
   defstruct name: nil,
+            identity: nil,
             affinity: %{},
             bias: %{},
             cards: nil,
@@ -19,6 +20,13 @@ defmodule Viralspiral.State.Player do
     %Player{player | name: name}
   end
 
+  def set_color(%Player{} = player, color) do
+    case color do
+      c when c in ["red", "yellow", "blue"] -> %Player{player | identity: color}
+      _ -> player
+    end
+  end
+
   def set_affinity(%Player{} = player, %Affinity{} = affinity) do
     %Player{player | affinity: Map.put(player.affinity, affinity.label, affinity)}
   end
@@ -27,19 +35,25 @@ defmodule Viralspiral.State.Player do
     %Player{player | bias: Map.put(player.bias, bias.label, bias)}
   end
 
-  def add_card(%Player{} = player, %ActiveCard{} = card) do
+  def add_card(%Player{} = player, card) do
     case player.cards do
       nil -> %Player{player | cards: [card]}
       _ -> %Player{player | cards: [card | player.cards]}
     end
   end
 
-  def insert_card_at() do
+  def reset_card(%Player{} = player) do
+    Map.put(player, :cards, nil)
   end
 
-  def reset_card() do
+  def get_card(%Player{} = player) do
+    case player.cards do
+      nil -> nil
+      _ -> hd(player.cards)
+    end
   end
 
-  def pop_card_at() do
+  def inc_clout(%Player{} = player) do
+    %Player{player | clout: player.clout + 1}
   end
 end

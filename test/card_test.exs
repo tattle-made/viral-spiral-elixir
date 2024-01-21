@@ -1,6 +1,6 @@
 defmodule CardTest do
   use ExUnit.Case
-  # alias Viralspiral.CardPartition, as: CardPartition
+  alias Viralspiral.CardPartition
 
   setup_all do
     default_deck = Viralspiral.CardData.new()
@@ -8,9 +8,11 @@ defmodule CardTest do
     {:ok, deck: partitioned_deck}
   end
 
+  @tag :wip
   test "check card count in deck", state do
     deck = state[:deck]
-    assert MapSet.size(deck.affinity_cat_cards) == 60
+    assert MapSet.size(deck.cards_affinity_cat_true) == 60
+    assert MapSet.size(deck.cards_affinity_cat_false) == 60
     assert MapSet.size(deck.affinity_sock_cards) == 60
     assert MapSet.size(deck.topical_cards) == 30
     assert MapSet.size(deck.bias_red_cards) == 30
@@ -18,6 +20,8 @@ defmodule CardTest do
   end
 
   test "draw card" do
+    # draw_type = %{category: topical}
+    # card = CardPartition.draw(8, adhiraj, 2)
     # deck = state[:deck]
     # affinity_cat_cards = deck.affinity_cat_cards
 

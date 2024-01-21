@@ -1,4 +1,4 @@
-defmodule Viralspiral.State.GameTest do
+defmodule Viralspiral.State.GamePlayTest do
   use ExUnit.Case
 
   alias Viralspiral.State.Player
@@ -56,16 +56,30 @@ defmodule Viralspiral.State.GameTest do
 
       %{topical_cards: topical_cards} = state[:deck]
       %{game: game} = state
-      # IO.inspect(topical_cards)
-      # assert card's owner
-      # where should this be tracked? should i add it to game? players field?
-      # it should be on player, when the card is added to player, it has other values
-      # like what actions can be taken on it
 
-      # increase player's clout
+      adhiraj = game.players["adhiraj"]
+      aman = game.players["aman"]
+      adhiraj_clout = adhiraj.clout
 
-      # update game state to show card position
-      IO.inspect(game)
+      assert adhiraj.cards == nil
+      assert aman.cards == nil
+
+      # adhiraj draws card
+      card = MapSet.to_list(topical_cards) |> hd
+      adhiraj = Player.add_card(adhiraj, card)
+      assert adhiraj.cards != nil
+      assert hd(adhiraj.cards).description != nil
+
+      # adhiraj passes the card to aman
+      card_to_pass = hd(adhiraj.cards)
+      adhiraj = Player.reset_card(adhiraj)
+      aman = Player.add_card(aman, card_to_pass)
+      adhiraj = Player.inc_clout(adhiraj)
+
+      assert adhiraj.cards == nil
+      assert aman.cards != nil
+      assert hd(aman.cards).description != nil
+      assert adhiraj.clout == adhiraj_clout + 1
     end
 
     test "passing affinity card affect game scores" do
