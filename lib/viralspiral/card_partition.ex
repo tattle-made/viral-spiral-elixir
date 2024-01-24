@@ -32,6 +32,7 @@ defmodule Viralspiral.CardPartition do
       |> Enum.with_index()
       |> Enum.map(fn card_index_tuple ->
         Map.put(elem(card_index_tuple, 0), :id, elem(card_index_tuple, 1))
+        |> Map.put()
       end)
       |> MapSet.new()
 
