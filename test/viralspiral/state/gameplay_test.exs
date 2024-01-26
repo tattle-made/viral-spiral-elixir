@@ -52,9 +52,7 @@ defmodule Viralspiral.State.GamePlayTest do
 
   describe "pass card" do
     test "passing topical card affect game scores", state do
-      # adhiraj passes card to aman
-
-      %{topical_cards: topical_cards} = state[:deck]
+      %{topical_cards_true: topical_cards_true} = state[:deck]
       %{game: game} = state
 
       adhiraj = game.players["adhiraj"]
@@ -65,7 +63,7 @@ defmodule Viralspiral.State.GamePlayTest do
       assert aman.cards == nil
 
       # adhiraj draws card
-      card = MapSet.to_list(topical_cards) |> hd
+      card = MapSet.to_list(topical_cards_true) |> hd
       adhiraj = Player.add_card(adhiraj, card)
       assert adhiraj.cards != nil
       assert hd(adhiraj.cards).description != nil

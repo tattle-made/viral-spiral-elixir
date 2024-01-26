@@ -5586,7 +5586,18 @@ defmodule Viralspiral.CardData do
         "\"A namaste is fine\" - suggests dying religious leader on deathbed, when asked about certain forms of greeting",
       affinity_towards: "high_fives",
       affinity_count: -1,
-      fakes: [],
+      fakes: [
+        %{
+          title: "",
+          description:
+            "\"Reject (other community) propoganda! a namaste is no replacement for high fives\" - urges religious leaders",
+          affinity_towards: "high_fives",
+          affinity_count: 1,
+          fake: true,
+          image: "",
+          tgb: 11.0
+        }
+      ],
       tgb: 11.0,
       image: ""
     },

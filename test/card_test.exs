@@ -1,22 +1,54 @@
 defmodule CardTest do
   use ExUnit.Case
   alias Viralspiral.CardPartition
+  alias Viralspiral.CardData
 
   setup_all do
-    default_deck = Viralspiral.CardData.new()
-    partitioned_deck = Viralspiral.CardPartition.partition(default_deck)
+    default_deck = CardData.new()
+    partitioned_deck = CardPartition.partition(default_deck)
     {:ok, deck: partitioned_deck}
   end
 
-  @tag :wip
   test "check card count in deck", state do
     deck = state[:deck]
-    assert MapSet.size(deck.cards_affinity_cat_true) == 60
-    assert MapSet.size(deck.cards_affinity_cat_false) == 60
-    assert MapSet.size(deck.affinity_sock_cards) == 60
-    assert MapSet.size(deck.topical_cards) == 30
-    assert MapSet.size(deck.bias_red_cards) == 30
-    assert MapSet.size(deck.bias_blue_cards) == 30
+
+    cards_affinity_cat_true = deck.cards_affinity_cat_true
+    cards_affinity_cat_false = deck.cards_affinity_cat_false
+    cards_affinity_sock_true = deck.cards_affinity_sock_true
+    cards_affinity_sock_false = deck.cards_affinity_sock_false
+    cards_affinity_houseboat_true = deck.cards_affinity_houseboat_true
+    cards_affinity_houseboat_false = deck.cards_affinity_houseboat_false
+    cards_affinity_skub_true = deck.cards_affinity_skub_true
+    cards_affinity_skub_false = deck.cards_affinity_skub_false
+    cards_affinity_highfive_true = deck.cards_affinity_highfive_true
+    cards_affinity_highfive_false = deck.cards_affinity_highfive_false
+    bias_red_cards = deck.bias_red_cards
+    bias_blue_cards = deck.bias_blue_cards
+    bias_yellow_cards = deck.bias_yellow_cards
+    topical_cards_true = deck.topical_cards_true
+    topical_cards_false = deck.topical_cards_false
+
+    assert MapSet.size(cards_affinity_cat_true) == 60
+    assert MapSet.size(cards_affinity_cat_false) == 60
+    assert MapSet.size(cards_affinity_sock_true) == 60
+    assert MapSet.size(cards_affinity_sock_false) == 60
+    assert MapSet.size(cards_affinity_houseboat_true) == 60
+    assert MapSet.size(cards_affinity_houseboat_false) == 60
+    assert MapSet.size(cards_affinity_skub_true) == 60
+    assert MapSet.size(cards_affinity_skub_false) == 60
+    assert MapSet.size(cards_affinity_highfive_true) == 60
+    assert MapSet.size(cards_affinity_highfive_false) == 60
+    assert MapSet.size(bias_red_cards) == 30
+    assert MapSet.size(bias_blue_cards) == 30
+    assert MapSet.size(bias_yellow_cards) == 30
+    assert MapSet.size(topical_cards_true) == 30
+    assert MapSet.size(topical_cards_false) == 30
+  end
+
+  test "check card bias after text substitution" do
+    # certain cards become biased based on their dynamic string
+    # we need to ensure that the bias for the card is set after
+    # text substitution
   end
 
   test "draw card" do
