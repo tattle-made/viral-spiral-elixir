@@ -1,5 +1,5 @@
-defmodule Viralspiral.CardData do
-  alias Viralspiral.CardData, as: Cards
+defmodule Viralspiral.Card.CardData do
+  alias Viralspiral.Card.CardData, as: Cards
   defstruct cards: [
     %{
       title: "",

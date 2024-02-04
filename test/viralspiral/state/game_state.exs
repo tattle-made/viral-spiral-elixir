@@ -1,4 +1,4 @@
-defmodule GameTest do
+defmodule Viralspiral.State.GameTest do
   use ExUnit.Case
 
   test "restore game status from disk" do

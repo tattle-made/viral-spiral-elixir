@@ -11,7 +11,9 @@ defmodule Viralspiral.State.Game do
             players: %{},
             deck: nil,
             discarded_cards: nil,
-            state: :initialized
+            state: :initialized,
+            active_affinities: [],
+            active_biases: []
 
   def new(player_count) do
     %Game{
@@ -23,8 +25,20 @@ defmodule Viralspiral.State.Game do
     %{game | name: name}
   end
 
+  def set_active_affinities(%Game{} = game, affinities) do
+    %{game | active_affinities: affinities}
+  end
+
+  def set_active_biases(%Game{} = game, biases) do
+    %{game | active_biases: biases}
+  end
+
   def decrement_chaos_countdown(%Game{} = game) do
     %{game | chaos_countdown: game.chaos_countdown - 1}
+  end
+
+  def set_chaos_countdown(%Game{} = game, value) do
+    %{game | chaos_countdown: value}
   end
 
   def add_player(%Game{} = game, %Player{} = player) do
@@ -38,6 +52,11 @@ defmodule Viralspiral.State.Game do
       _ ->
         :noop
     end
+  end
+
+  def player_list(%Game{} = game) do
+    Map.keys(game.players)
+    |> Enum.map(fn player_name -> Map.get(game.players, player_name) end)
   end
 
   def update_player(%Game{} = game, name, %Player{} = new_player) do

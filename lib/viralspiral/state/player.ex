@@ -2,8 +2,7 @@ defmodule Viralspiral.State.Player do
   alias Viralspiral.State.Affinity
   alias Viralspiral.State.Bias
   alias Viralspiral.State.Player
-  alias Viralspiral.CardData
-  alias Viralspiral.State.ActiveCard
+  # alias Viralspiral.CardData
 
   defstruct name: nil,
             identity: nil,
@@ -14,6 +13,21 @@ defmodule Viralspiral.State.Player do
 
   def new() do
     %Player{}
+  end
+
+  def identities do
+    [
+      :red,
+      :yellow,
+      :blue
+    ]
+  end
+
+  def set_identity(%Player{} = player, color) do
+    case color do
+      c when c in [:red, :yellow, :blue] -> %Player{player | identity: color}
+      _ -> player
+    end
   end
 
   def set_name(%Player{} = player, name) do
@@ -55,5 +69,9 @@ defmodule Viralspiral.State.Player do
 
   def inc_clout(%Player{} = player) do
     %Player{player | clout: player.clout + 1}
+  end
+
+  def set_clout(%Player{} = player, clout) do
+    %Player{player | clout: clout}
   end
 end

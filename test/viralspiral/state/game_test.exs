@@ -92,4 +92,21 @@ defmodule Viralspiral.State.GameTest do
     result = Game.add_player(game, player_adhiraj_two)
     assert result == :noop
   end
+
+  test "get player list", state do
+    game = state[:game]
+    player_adhiraj = Player.new() |> Player.set_name("adhiraj")
+    player_aman = Player.new() |> Player.set_name("aman")
+    player_krys = Player.new() |> Player.set_name("krys")
+    player_farah = Player.new() |> Player.set_name("farah")
+
+    game =
+      game
+      |> Game.add_player(player_adhiraj)
+      |> Game.add_player(player_aman)
+      |> Game.add_player(player_krys)
+      |> Game.add_player(player_farah)
+
+    # IO.inspect(Game.player_list(game))
+  end
 end

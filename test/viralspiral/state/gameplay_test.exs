@@ -4,13 +4,14 @@ defmodule Viralspiral.State.GamePlayTest do
   alias Viralspiral.State.Player
   alias Viralspiral.State.Affinity
   alias Viralspiral.State.Bias
-  alias Viralspiral.CardPartition
+  alias Viralspiral.Card.CardPartition
   alias Viralspiral.State.Game
+  alias Viralspiral.Card.CardData
   # import card, deck and partitioned deck
 
   setup_all do
-    default_deck = Viralspiral.CardData.new()
-    partitioned_deck = Viralspiral.CardPartition.partition(default_deck)
+    default_deck = CardData.new()
+    partitioned_deck = CardPartition.partition(default_deck)
 
     game = Game.new(4)
     cat_affinity = Affinity.cat()
