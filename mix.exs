@@ -9,7 +9,13 @@ defmodule Viralspiral.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      docs: [
+        extras: [
+          "docs/log.md",
+          "docs/card-logic.md"
+        ]
+      ]
     ]
   end
 

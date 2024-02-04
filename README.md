@@ -27,3 +27,10 @@ master.csv, source-anti-blue.csv, source-anti-red.csv, source-anti-yellow.csv, s
 Place them in the `text` directory in root
 1. Run `mix import_data` to convert the csv files into relevant modules
 2. Run tests to catch any import errors
+
+
+## View Documentations
+1. Run `mix docs`
+2. cd into `docs/`
+3. run `http-server doc/`
+4. visit localhost:8081
